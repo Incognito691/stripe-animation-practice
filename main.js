@@ -67,6 +67,7 @@ window.addEventListener("keydown", (e) => {
             currentFrame = 0;
         }
     }
+
 });
 
 window.addEventListener("keyup", (e) => {
@@ -74,15 +75,19 @@ window.addEventListener("keyup", (e) => {
     if (e.key === "ArrowLeft") keys.left = false;
     if (e.key === "Shift") keys.shift = false;
     if (e.key === " ") keys.space = false;
+    currentState='idle'
+    currentFrame=0
+    lastFrameTime=0
 });
 
 // Main animation loop
 function animate(time) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+
     if (time - lastFrameTime > frameInterval) {
         lastFrameTime = time;
-        const maxFrames = animationCoord[currentState].length;
+        const maxFrames = animationCoord[currentState]?.length 
         currentFrame = (currentFrame + 1) % maxFrames;
     }
 
@@ -99,9 +104,7 @@ function animate(time) {
     if (keys.right) {
         dx += speed;
         facingRight = true;
-    } else{
-      currentState = "idle";
-    }
+    } 
     if (keys.left) {
         dx -= speed;
         facingRight = false;
@@ -136,6 +139,7 @@ function animate(time) {
     const [sx, sy, sWidth, sHeight] = animationCoord[currentState][currentFrame];
     const scaleFactor = 1.5;
 
+
     ctx.save();
     if (!facingRight) {
         ctx.scale(-1, 1);
@@ -150,5 +154,6 @@ function animate(time) {
 
 man.onload = () => {
     ctx.imageSmoothingEnabled = false;
-    animate(0);
+
+    animate();
 };
