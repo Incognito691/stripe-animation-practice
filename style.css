@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    border: 4px solid black;
+    background-color: white;
+    width: 90vw;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
